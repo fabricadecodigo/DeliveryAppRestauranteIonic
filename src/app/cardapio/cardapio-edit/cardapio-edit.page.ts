@@ -1,3 +1,4 @@
+import { ToastService } from './../../core/services/toast.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 export class CardapioEditPage implements OnInit {
   title = 'Novo produto';
   
-  constructor() { }
+  constructor(
+    private toast: ToastService
+  ) { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    try {
+      // chamar a api
+      this.toast.showSuccess('Produto cadastrado com sucesso');
+    } catch (error) {
+      this.toast.showError('Erro ao cadastrar o produto');
+    }
+  }
 }

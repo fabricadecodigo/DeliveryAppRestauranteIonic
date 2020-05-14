@@ -1,3 +1,5 @@
+import { ToastService } from './../../core/services/toast.service';
+import { AlertService } from './../../core/services/alert.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class CardapioListPage implements OnInit {
   products: any[] = [];
 
-  constructor() { }
+  constructor(
+    private alert: AlertService,
+    private toast: ToastService
+  ) { }
 
   ngOnInit() {
 
@@ -25,4 +30,21 @@ export class CardapioListPage implements OnInit {
     }
   }
 
+  remove(produto: any) {
+    this.alert.showConfirmDelete(produto.name, () => this.executeRemove(produto));
+  }
+
+  private executeRemove(produto: any) {
+    try {
+      // chamar a api para remover
+
+      // Removendo da tela
+      const index = this.products.indexOf(produto);
+      this.products.splice(index, 1);
+
+      this.toast.showSuccess('Produto removido com sucesso');
+    } catch (error) {
+      this.toast.showError('Erro ao remover o produto');
+    }
+  }
 }
