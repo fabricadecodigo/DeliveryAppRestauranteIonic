@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Categorias',
-      url: '/folder/Inbox',
+      url: '/categories',
       icon: 'list-circle-outline'
     },
     {
