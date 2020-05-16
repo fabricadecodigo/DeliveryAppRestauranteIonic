@@ -44,6 +44,14 @@ const routes: Routes = [
         loadChildren: () => import('./categories/category-edit/category-edit.module').then(m => m.CategoryEditPageModule)
       }
     ]
+  },
+  {
+    path: 'restaurant',
+    loadChildren: () => import('./restaurant/restaurant.module').then( m => m.RestaurantPageModule)
+  },
+  {
+    path: 'delivery',
+    loadChildren: () => import('./delivery/delivery.module').then( m => m.DeliveryPageModule)
   }
 
 ];

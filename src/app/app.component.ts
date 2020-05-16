@@ -29,12 +29,12 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Restaurante',
-      url: '/folder/Inbox',
+      url: '/restaurant',
       icon: 'information-circle-outline'
     },
     {
       title: 'Entrega',
-      url: '/folder/Inbox',
+      url: '/delivery',
       icon: 'bicycle-outline'
     }
   ];
