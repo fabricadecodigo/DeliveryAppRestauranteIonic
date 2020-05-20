@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Entrega',
-      url: '/folder/Inbox',
+      url: '/delivery',
       icon: 'bicycle-outline'
     }
   ];

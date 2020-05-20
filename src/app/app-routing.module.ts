@@ -44,8 +44,24 @@ const routes: Routes = [
         loadChildren: () => import('./categories/category-edit/category-edit.module').then(m => m.CategoryEditPageModule)
       }
     ]
-  }
-
+  },
+  {
+    path: 'delivery',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./delivery/delivery-list/delivery-list.module').then( m => m.DeliveryListPageModule)
+      },
+      {
+        path: 'new',
+        loadChildren: () => import('./delivery/delivery-edit/delivery-edit.module').then( m => m.DeliveryEditPageModule)
+      },
+      {
+        path: 'edit/:id',
+        loadChildren: () => import('./delivery/delivery-edit/delivery-edit.module').then( m => m.DeliveryEditPageModule)
+      }
+    ]
+  },
 ];
 
 @NgModule({

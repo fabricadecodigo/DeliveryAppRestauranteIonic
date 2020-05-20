@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Locais de entrega</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let delivery of deliveries">
+
+      <ion-label>
+        <h1>{{delivery.neighborhood}}</h1>
+        <p><strong>Tempo de entrega:</strong> {{delivery.timeToDelivery}}</p>
+        <p *ngIf="delivery.free">
+          <ion-text color="success">Entrega grátis</ion-text>
+        </p>
+        <p *ngIf="!delivery.free">
+          <strong>Valor:</strong> {{delivery.value | currency:'BRL' }}
+        </p>
+
+        <!-- Action buttons -->
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" color="secondary" (click)="remove(delivery)">
+                <ion-icon slot="start" name="trash"></ion-icon>
+                Remover
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button expand="block" color="secondary">
+                <ion-icon slot="start" name="pencil"></ion-icon>
+                Editar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="primary">
+    <ion-fab-button [routerLink]="['new']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
