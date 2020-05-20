@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onSubmit()">
+
+    <ion-item>
+      <ion-label position="stacked">Bairro</ion-label>
+      <ion-input [(ngModel)]="deliveryModel.neighborhood" name="neighborhood"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Tempo de entrega (minutos)</ion-label>
+      <ion-input [(ngModel)]="deliveryModel.timeToDelivery" name="timeToDelivery" type="number" min="0"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Entrega grátis?</ion-label>
+      <ion-checkbox [(ngModel)]="deliveryModel.free" name="free" slot="start" (ionChange)="onFreeCheckboxChange($event)"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Valor da entrega</ion-label>
+      <ion-input [(ngModel)]="deliveryModel.value" name="value" type="number" min="0" [disabled]="deliveryModel.free"></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" class="ion-margin-vertical" color="primary" expand="block">
+      Salvar
+    </ion-button>
+  </form>
+</ion-content>

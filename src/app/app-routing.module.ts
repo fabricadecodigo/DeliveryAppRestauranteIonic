@@ -44,8 +44,44 @@ const routes: Routes = [
         loadChildren: () => import('./categories/category-edit/category-edit.module').then(m => m.CategoryEditPageModule)
       }
     ]
-  }
-
+  },
+  {
+    path: 'delivery',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./delivery/delivery-list/delivery-list.module').then(m => m.DeliveryListPageModule)
+      },
+      {
+        path: 'new',
+        loadChildren: () => import('./delivery/delivery-edit/delivery-edit.module').then(m => m.DeliveryEditPageModule)
+      },
+      {
+        path: 'edit/:id',
+        loadChildren: () => import('./delivery/delivery-edit/delivery-edit.module').then(m => m.DeliveryEditPageModule)
+      }
+    ]
+  },
+  {
+    path: 'business-hours',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./business-hours/business-hours-list/business-hours-list.module')
+          .then(m => m.BusinessHoursListPageModule)
+      },
+      {
+        path: 'new',
+        loadChildren: () => import('./business-hours/business-hours-edit/business-hours-edit.module')
+          .then(m => m.BusinessHoursEditPageModule)
+      },
+      {
+        path: 'edit/:id',
+        loadChildren: () => import('./business-hours/business-hours-edit/business-hours-edit.module')
+          .then(m => m.BusinessHoursEditPageModule)
+      }
+    ]
+  },
 ];
 
 @NgModule({
