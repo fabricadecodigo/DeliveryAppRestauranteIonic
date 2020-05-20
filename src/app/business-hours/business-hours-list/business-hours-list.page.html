@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Horários de funcionamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let businessHour of businessHours">
+
+      <ion-label>
+        <h1>{{businessHour.day}}</h1>
+        <p><strong>Hora inicio:</strong> {{businessHour.start}}</p>
+        <p><strong>Hora fim:</strong> {{businessHour.end}}</p>
+
+        <!-- Action buttons -->
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" color="secondary" (click)="remove(businessHour)">
+                <ion-icon slot="start" name="trash"></ion-icon>
+                Remover
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button expand="block" color="secondary">
+                <ion-icon slot="start" name="pencil"></ion-icon>
+                Editar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="primary">
+    <ion-fab-button [routerLink]="['new']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
