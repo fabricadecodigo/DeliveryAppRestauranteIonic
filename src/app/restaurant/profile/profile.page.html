@@ -4,6 +4,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
+
+  <ion-item>
+    <ion-label position="floating">Nome</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Telefone</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Pedido mínimo</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Categoria</ion-label>
+    <ion-select value="Lanches" okText="Ok" cancelText="Cancelar">
+      <ion-select-option value="Lanches">Lanches</ion-select-option>
+      <ion-select-option value="Marmitas">Marmitas</ion-select-option>
+      <ion-select-option value="Pizzas">Pizzas</ion-select-option>
+      <ion-select-option value="Doces">Doces</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Descrição</ion-label>
+    <ion-textarea rows="6" cols="20"></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-button expand="full" color="secondary">Salvar</ion-button>
+  </ion-item>
+
 
 </ion-content>
