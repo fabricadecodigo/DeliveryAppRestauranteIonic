@@ -23,7 +23,7 @@ export class DeliveryEditPage implements OnInit {
   ngOnInit() {
   }
 
-  onFreeCheckboxChange($event) {
+  onFreeCheckboxChange() {
     if (this.deliveryModel.free) {
       this.deliveryModel.value = null;
     }
