@@ -1,0 +1,5 @@
+<ion-item *ngIf="control.invalid && (control.dirty || control.touched)">
+  <ion-label color="danger" *ngIf="control.errors.required">Esse campo é obrigatório</ion-label>
+  <ion-label color="danger" *ngIf="control.errors.minlength">Informe pelo menos 5 letras</ion-label>
+  <ion-label color="danger" *ngIf="control.errors.minValue">O valor mínimo é {{ control.errors.minValue }}</ion-label>
+</ion-item>

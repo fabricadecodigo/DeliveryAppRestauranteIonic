@@ -9,20 +9,19 @@
 
     <ion-item>
       <ion-label position="stacked">Bairro</ion-label>
-      <ion-input [(ngModel)]="deliveryModel.neighborhood" name="neighborhood" #neighborhood="ngModel" required minlength="5"></ion-input>
+      <ion-input [(ngModel)]="deliveryModel.neighborhood" name="neighborhood" #neighborhood="ngModel" 
+        required 
+        minlength="5"></ion-input>
     </ion-item>
-    <ion-item *ngIf="neighborhood.invalid && (neighborhood.dirty || neighborhood.touched)">
-      <ion-label color="danger" *ngIf="neighborhood.errors.required">Esse campo é obrigatório</ion-label>
-      <ion-label color="danger" *ngIf="neighborhood.errors.minlength">Informe pelo menos 5 letras</ion-label>
-    </ion-item>
-
+    <app-validation-container [control]="neighborhood.control"></app-validation-container>
+    
     <ion-item>
       <ion-label position="stacked">Tempo de entrega (minutos)</ion-label>
-      <ion-input [(ngModel)]="deliveryModel.timeToDelivery" name="timeToDelivery" #timeToDelivery="ngModel" type="number" min="0" required></ion-input>
+      <ion-input [(ngModel)]="deliveryModel.timeToDelivery" name="timeToDelivery" #timeToDelivery="ngModel" type="number" min="0" 
+        required
+        appMinValueValitation="1"></ion-input>
     </ion-item>
-    <ion-item *ngIf="timeToDelivery.invalid && (timeToDelivery.dirty || timeToDelivery.touched)">
-      <ion-label color="danger" *ngIf="timeToDelivery.errors.required">Esse campo é obrigatório</ion-label>
-    </ion-item>
+    <app-validation-container [control]="timeToDelivery.control" ></app-validation-container>
 
     <ion-item>
       <ion-label>Entrega grátis?</ion-label>
@@ -31,8 +30,12 @@
 
     <ion-item>
       <ion-label position="stacked">Valor da entrega</ion-label>
-      <ion-input [(ngModel)]="deliveryModel.value" name="value" type="number" min="0" [disabled]="deliveryModel.free"></ion-input>
+      <ion-input [(ngModel)]="deliveryModel.value" name="value" #value="ngModel" type="number" min="0" 
+      [disabled]="deliveryModel.free"
+      [required]="!deliveryModel.free"
+      appMinValueValitation="1"></ion-input>
     </ion-item>
+    <app-validation-container [control]="value.control" ></app-validation-container>
 
     <ion-button type="submit" class="ion-margin-vertical" color="primary" expand="block" [disabled]="form.form.invalid">
       Salvar
