@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-validation-container',
@@ -10,6 +10,9 @@ export class ValidationContainerComponent implements OnInit {
 
   @Input()
   control: FormControl;
+
+  @Input()
+  form?: FormGroup;
 
   constructor() { }
 

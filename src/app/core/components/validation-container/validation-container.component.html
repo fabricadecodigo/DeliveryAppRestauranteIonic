@@ -1,5 +1,9 @@
-<ion-item *ngIf="control.invalid && (control.dirty || control.touched)">
+<ion-item *ngIf="control.invalid && (control.dirty || control.touched)" lines="none">
   <ion-label color="danger" *ngIf="control.errors.required">Esse campo é obrigatório</ion-label>
   <ion-label color="danger" *ngIf="control.errors.minlength">Informe pelo menos 5 letras</ion-label>
   <ion-label color="danger" *ngIf="control.errors.minValue">O valor mínimo é {{ control.errors.minValue }}</ion-label>
+</ion-item>
+<ion-item *ngIf="form?.errors?.dateCrossValidationError && (form?.dirty || form?.touched)" lines="none">
+  <ion-label color="danger" class="ion-text-wrap">A "{{ form.errors.dateCrossValidationError.end }}" não pode ser maior/igual
+    que a "{{ form?.errors?.dateCrossValidationError.start }}"</ion-label>
 </ion-item>
