@@ -1,11 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
+import { SharedModule } from './../../core/modules/shared/shared.module';
 import { CardapioEditPageRoutingModule } from './cardapio-edit-routing.module';
-
 import { CardapioEditPage } from './cardapio-edit.page';
 
 @NgModule({
@@ -13,7 +11,8 @@ import { CardapioEditPage } from './cardapio-edit.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CardapioEditPageRoutingModule
+    CardapioEditPageRoutingModule,
+    SharedModule
   ],
   declarations: [CardapioEditPage]
 })

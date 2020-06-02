@@ -11,7 +11,7 @@
       <ion-label position="stacked">Bairro</ion-label>
       <ion-input [(ngModel)]="deliveryModel.neighborhood" name="neighborhood" #neighborhood="ngModel" 
         required 
-        minlength="5"></ion-input>
+        minlength="2"></ion-input>
     </ion-item>
     <app-validation-container [control]="neighborhood.control"></app-validation-container>
     

@@ -19,6 +19,12 @@ export class BusinessHoursEditPage implements OnInit {
     'Domingo'
   ];
 
+  businessHourModel = {
+    dayOfWeek: '',
+    start: null,
+    end: null
+  };
+
   constructor(
     private toast: ToastService
   ) { }

@@ -5,14 +5,15 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
 
     <ion-item>
       <ion-label position="stacked">Nome</ion-label>
-      <ion-input></ion-input>
+      <ion-input [(ngModel)]="categoryModel.name" name="name" #name="ngModel" required minlength="2"></ion-input>
     </ion-item>
+    <app-validation-container [control]="name.control"></app-validation-container>
 
-    <ion-button type="submit" class="ion-margin-vertical" color="primary" expand="block">
+    <ion-button type="submit" class="ion-margin-vertical" color="primary" expand="block" [disabled]="form.form.invalid">
       Salvar
     </ion-button>
   </form>

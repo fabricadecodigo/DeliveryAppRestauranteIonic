@@ -5,30 +5,34 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form (ngSubmit)="onSubmit()" >
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
     <ion-item>
       <ion-label position="stacked">Categoria</ion-label>
-      <ion-select placeholder="">
+      <ion-select placeholder="" [(ngModel)]="cardapioModel.category" name="category" #category="ngModel" required>
         <ion-select-option value="f">Bebidas</ion-select-option>
         <ion-select-option value="m">Lanche</ion-select-option>
       </ion-select>
     </ion-item>
-  
+    <app-validation-container [control]="category.control"></app-validation-container>
+
     <ion-item>
       <ion-label position="stacked">Nome</ion-label>
-      <ion-input></ion-input>
+      <ion-input [(ngModel)]="cardapioModel.name" name="name" #name="ngModel" required minlength="2"></ion-input>
     </ion-item>
-  
+    <app-validation-container [control]="name.control"></app-validation-container>
+
     <ion-item>
       <ion-label position="stacked">Preço</ion-label>
-      <ion-input type="number"></ion-input>
+      <ion-input type="number" [(ngModel)]="cardapioModel.price" name="price" #price="ngModel" required
+        appMinValueValitation="1"></ion-input>
     </ion-item>
-  
+    <app-validation-container [control]="price.control"></app-validation-container>
+
     <ion-item>
       <ion-label position="stacked">Descrição</ion-label>
-      <ion-textarea></ion-textarea>
+      <ion-textarea [(ngModel)]="cardapioModel.description" name="description" #description="ngModel"></ion-textarea>
     </ion-item>
-  
+
     <!-- Foto -->
     <div class="ion-margin-vertical">
       <ion-card>
@@ -40,7 +44,7 @@
           </ion-button>
         </ion-card-content>
       </ion-card>
-  
+
       <div class="ion-text-center">
         <ion-button color="medium" size="large">
           <ion-icon slot="start" name="image-outline"></ion-icon>
@@ -48,8 +52,8 @@
         </ion-button>
       </div>
     </div>
-  
-    <ion-button type="submit" class="ion-margin-vertical" color="primary" expand="block">
+
+    <ion-button type="submit" class="ion-margin-vertical" color="primary" expand="block" [disabled]="form.form.invalid">
       Salvar
     </ion-button>
 
