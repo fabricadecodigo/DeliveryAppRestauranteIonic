@@ -8,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardapioEditPage implements OnInit {
   title = 'Novo produto';
-  
+
+  cardapioModel = {
+    category: '',
+    name: '',
+    price: null,
+    description: ''
+  }
+
   constructor(
     private toast: ToastService
   ) { }
