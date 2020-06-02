@@ -9,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class CategoryEditPage implements OnInit {
   title = 'Nova categoria';
 
+  categoryModel = {
+    name: ''
+  };
+
   constructor(
     private toast: ToastService
   ) { }
