@@ -1,37 +1,38 @@
-import { ToastService } from './../../core/services/toast.service';
+import { Component } from '@angular/core';
 import { AlertService } from './../../core/services/alert.service';
-import { Component, OnInit } from '@angular/core';
+import { ToastService } from './../../core/services/toast.service';
+import { CategoryService } from './../shared/category.service';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.page.html',
   styleUrls: ['./category-list.page.scss'],
 })
-export class CategoryListPage implements OnInit {
-  categories: any[] = [];
+export class CategoryListPage {
+  categories: ICategoryResponse[] = [];
 
   constructor(
     private alert: AlertService,
-    private toast: ToastService
+    private toast: ToastService,
+    private categoryService: CategoryService
   ) { }
 
-  ngOnInit() {
-    for (let i = 0; i < 20; i++) {
-      const category = {
-        name: `Hambúrguer ${i + 1}`,
-      };
-
-      this.categories.push(category);
-    }
+  ionViewDidEnter() {
+    this.loadCategories();
   }
 
-  remove(category: any) {
+  async loadCategories() {
+    this.categories = await this.categoryService.getAll();
+  }
+
+  remove(category: ICategoryResponse) {
     this.alert.showConfirmDelete(category.name, () => this.executeRemove(category));
   }
 
-  private executeRemove(category: any) {
+  private async executeRemove(category: ICategoryResponse) {
     try {
       // chamar a api para remover
+      await this.categoryService.delete(category._id);
 
       // Removendo da tela
       const index = this.categories.indexOf(category);

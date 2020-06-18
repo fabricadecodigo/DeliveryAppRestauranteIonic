@@ -1,0 +1,3 @@
+interface ICategoryModel {
+    name: string;
+}

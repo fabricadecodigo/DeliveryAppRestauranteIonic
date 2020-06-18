@@ -5,6 +5,10 @@
 </ion-header>
 
 <ion-content>
+  <p *ngIf="categories.length == 0" class="ion-padding ion-text-center">
+    Nenhuma categoria encontrada. <br />Clique em adicionar para incluir uma nova categoria
+  </p>
+
   <ion-list>
     <ion-item *ngFor="let category of categories">
       
@@ -21,7 +25,7 @@
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button expand="block" color="secondary">
+              <ion-button expand="block" color="secondary" [routerLink]="['edit', category._id]">
                 <ion-icon slot="start" name="pencil"></ion-icon>
                 Editar
               </ion-button>
