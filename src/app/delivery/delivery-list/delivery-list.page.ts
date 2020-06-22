@@ -1,40 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastService } from './../../core/services/toast.service';
 import { AlertService } from './../../core/services/alert.service';
+import { ToastService } from './../../core/services/toast.service';
+import { DeliveryService } from './../shared/delivery.service';
 
 @Component({
   selector: 'app-delivery-list',
   templateUrl: './delivery-list.page.html',
   styleUrls: ['./delivery-list.page.scss'],
 })
-export class DeliveryListPage implements OnInit {
-  deliveries: any[] = [];
+export class DeliveryListPage {
+  deliveries: IDeliveryResponse[] = [];
 
   constructor(
     private alert: AlertService,
-    private toast: ToastService
+    private toast: ToastService,
+    private deliveryService: DeliveryService
   ) { }
 
-  ngOnInit() {
-    for (let i = 0; i < 20; i++) {
-      const delivery = {
-        neighborhood: `Bairro ${i + 1}`,
-        timeToDelivery: 60,
-        free: (i > 0) && ((i % 2) === 0),
-        value: (10.5 * (i + 1))
-      };
-
-      this.deliveries.push(delivery);
-    }
+  ionViewDidEnter() {
+    this.loadDelivery();
   }
 
-  remove(delivery: any) {
+  async loadDelivery() {
+    this.deliveries = await this.deliveryService.getAll();
+  }
+
+  remove(delivery: IDeliveryResponse) {
     this.alert.showConfirmDelete(delivery.neighborhood, () => this.executeRemove(delivery));
   }
 
-  private executeRemove(delivery: any) {
+  private async executeRemove(delivery: IDeliveryResponse) {
     try {
       // chamar a api para remover
+      await this.deliveryService.delete(delivery._id);
 
       // Removendo da tela
       const index = this.deliveries.indexOf(delivery);
@@ -45,5 +43,4 @@ export class DeliveryListPage implements OnInit {
       this.toast.showError('Erro ao remover o local de entrega');
     }
   }
-
 }

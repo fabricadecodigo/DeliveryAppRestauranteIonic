@@ -5,6 +5,10 @@
 </ion-header>
 
 <ion-content>
+  <p *ngIf="deliveries.length == 0" class="ion-padding ion-text-center">
+    Nenhuma local de entrega encontrado. <br />Clique em adicionar para incluir um novo local de entrega
+  </p>
+
   <ion-list>
     <ion-item *ngFor="let delivery of deliveries">
 
@@ -28,7 +32,7 @@
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button expand="block" color="secondary">
+              <ion-button expand="block" color="secondary" [routerLink]="['edit', delivery._id]">
                 <ion-icon slot="start" name="pencil"></ion-icon>
                 Editar
               </ion-button>
