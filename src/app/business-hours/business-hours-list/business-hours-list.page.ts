@@ -1,65 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastService } from './../../core/services/toast.service';
 import { AlertService } from './../../core/services/alert.service';
+import { ToastService } from './../../core/services/toast.service';
+import { BusinessHourService } from './../shared/business-hour.service';
 
 @Component({
   selector: 'app-business-hours-list',
   templateUrl: './business-hours-list.page.html',
   styleUrls: ['./business-hours-list.page.scss'],
 })
-export class BusinessHoursListPage implements OnInit {
-  businessHours: any[] = [];
+export class BusinessHoursListPage {
+  businessHours: IBusinessHourResponse[] = [];
 
   constructor(
     private alert: AlertService,
-    private toast: ToastService
+    private toast: ToastService,
+    private businessHourService: BusinessHourService
   ) { }
 
-  ngOnInit() {
-    this.businessHours.push({
-      day: 'Terça Feira',
-      start: '18:00',
-      end: '00:00'
-    });
-
-    this.businessHours.push({
-      day: 'Quarta Feira',
-      start: '18:00',
-      end: '00:00'
-    });
-
-    this.businessHours.push({
-      day: 'Quinta Feira',
-      start: '18:00',
-      end: '00:00'
-    });
-
-    this.businessHours.push({
-      day: 'Sexta Feira',
-      start: '18:00',
-      end: '02:00'
-    });
-
-    this.businessHours.push({
-      day: 'Sábado',
-      start: '18:00',
-      end: '02:00'
-    });
-
-    this.businessHours.push({
-      day: 'Domingo',
-      start: '18:00',
-      end: '01:00'
-    });
+  ionViewDidEnter() {
+    this.loadCategories();
   }
 
-  remove(businessHour: any) {
-    this.alert.showConfirmDelete(businessHour.day, () => this.executeRemove(businessHour));
+  async loadCategories() {
+    this.businessHours = await this.businessHourService.getAll();
   }
 
-  private executeRemove(businessHour: any) {
+  remove(businessHour: IBusinessHourResponse) {
+    this.alert.showConfirmDelete(this.getDayOfWeekName(businessHour.dayOfWeek), () => this.executeRemove(businessHour));
+  }
+
+  private async executeRemove(businessHour: IBusinessHourResponse) {
     try {
       // chamar a api para remover
+      await this.businessHourService.delete(businessHour._id);
 
       // Removendo da tela
       const index = this.businessHours.indexOf(businessHour);
@@ -69,5 +42,9 @@ export class BusinessHoursListPage implements OnInit {
     } catch (error) {
       this.toast.showError('Erro ao remover o horário de funcionamento');
     }
+  }
+
+  getDayOfWeekName(value: number) {
+    return this.businessHourService.getDayOfWeekName(value);
   }
 }

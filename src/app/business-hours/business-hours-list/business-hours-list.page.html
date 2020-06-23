@@ -9,9 +9,9 @@
     <ion-item *ngFor="let businessHour of businessHours">
 
       <ion-label>
-        <h1>{{businessHour.day}}</h1>
-        <p><strong>Hora inicio:</strong> {{businessHour.start}}</p>
-        <p><strong>Hora fim:</strong> {{businessHour.end}}</p>
+        <h1>{{getDayOfWeekName(businessHour.dayOfWeek)}}</h1>
+        <p><strong>Hora inicio:</strong> {{businessHour.start | date:'HH:mm'}}</p>
+        <p><strong>Hora fim:</strong> {{businessHour.end | date:'HH:mm'}}</p>
 
         <!-- Action buttons -->
         <ion-grid>
@@ -23,7 +23,7 @@
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button expand="block" color="secondary">
+              <ion-button expand="block" color="secondary" [routerLink]="['edit', businessHour._id]">
                 <ion-icon slot="start" name="pencil"></ion-icon>
                 Editar
               </ion-button>
