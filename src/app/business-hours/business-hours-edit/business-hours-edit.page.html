@@ -11,7 +11,7 @@
     <ion-item>
       <ion-label position="stacked">Dia da semana</ion-label>
       <ion-select [(ngModel)]="businessHourModel.dayOfWeek" name="dayOfWeek" #dayOfWeek="ngModel" required>
-        <ion-select-option *ngFor="let day of daysOfWeek" [value]="day">{{day}}</ion-select-option>
+        <ion-select-option *ngFor="let day of daysOfWeek" [value]="day.value">{{day.text}}</ion-select-option>
       </ion-select>
     </ion-item>
     <app-validation-container [control]="dayOfWeek.control"></app-validation-container>
