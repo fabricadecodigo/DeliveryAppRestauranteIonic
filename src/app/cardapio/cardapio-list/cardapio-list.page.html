@@ -5,16 +5,20 @@
 </ion-header>
 
 <ion-content>
+  <p *ngIf="products.length == 0" class="ion-padding ion-text-center">
+    Nenhum produto encontrado. <br />Clique em adicionar para incluir um novo produto
+  </p>
 
   <ion-list>
     <ion-item *ngFor="let product of products">
       <ion-thumbnail slot="start">
-        <ion-img [src]="product.photoUrl"></ion-img>
+        <ion-img *ngIf="product.photoUrl" [src]="product.photoUrl"></ion-img>
+        <ion-img *ngIf="!product.photoUrl" src="https://source.unsplash.com/sc5sTPMrVfk/640x531"></ion-img>
       </ion-thumbnail>
       <ion-label>
-        <h1>{{product.name}}</h1>
-        <small>{{product.category}}</small>
-        <p class="ion-text-wrap">{{product.description}}</p>
+        <h1 class="ion-text-wrap">{{product.name}}</h1>
+        <small>{{product.category.name}}</small>
+        <p class="text-wrap">{{product.description}}</p>
 
         <ion-text color="success">
           <p>{{product.price | currency:'BRL'}}</p>
@@ -30,7 +34,7 @@
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button expand="block" color="secondary">
+              <ion-button expand="block" color="secondary" [routerLink]="['edit', product._id]" >
                 <ion-icon slot="start" name="pencil"></ion-icon>
                 Editar
               </ion-button>

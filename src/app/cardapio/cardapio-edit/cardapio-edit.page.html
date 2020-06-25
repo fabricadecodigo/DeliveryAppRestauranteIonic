@@ -9,8 +9,8 @@
     <ion-item>
       <ion-label position="stacked">Categoria</ion-label>
       <ion-select placeholder="" [(ngModel)]="cardapioModel.category" name="category" #category="ngModel" required>
-        <ion-select-option value="f">Bebidas</ion-select-option>
-        <ion-select-option value="m">Lanche</ion-select-option>
+        <ion-select-option *ngFor="let category of cartegories" [value]="category._id">{{category.name}}
+        </ion-select-option>
       </ion-select>
     </ion-item>
     <app-validation-container [control]="category.control"></app-validation-container>
