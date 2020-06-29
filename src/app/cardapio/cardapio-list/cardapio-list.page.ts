@@ -21,11 +21,11 @@ export class CardapioListPage {
     this.products = await this.cardapioService.getAll();
   }
 
-  remove(produto: ICardapioResponse) {
+  remove(produto: ICardapioListResponse) {
     this.alert.showConfirmDelete(produto.name, () => this.executeRemove(produto));
   }
 
-  private async executeRemove(produto: ICardapioResponse) {
+  private async executeRemove(produto: ICardapioListResponse) {
     try {
       // chamar a api para remover
       await this.cardapioService.delete(produto._id);
