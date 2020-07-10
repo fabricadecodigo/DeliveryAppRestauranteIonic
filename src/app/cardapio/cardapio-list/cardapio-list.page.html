@@ -12,8 +12,7 @@
   <ion-list>
     <ion-item *ngFor="let product of products">
       <ion-thumbnail slot="start">
-        <ion-img *ngIf="product.photoUrl" [src]="product.photoUrl"></ion-img>
-        <ion-img *ngIf="!product.photoUrl" src="https://source.unsplash.com/sc5sTPMrVfk/640x531"></ion-img>
+        <ion-img *ngIf="product.photoUrl" [src]="product.photoUrl"></ion-img>        
       </ion-thumbnail>
       <ion-label>
         <h1 class="ion-text-wrap">{{product.name}}</h1>

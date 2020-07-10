@@ -35,18 +35,20 @@
 
     <!-- Foto -->
     <div class="ion-margin-vertical">
-      <ion-card>
-        <img src="https://source.unsplash.com/sc5sTPMrVfk/640x531" />
+      <input type="file" #fileInput (change)="addImageFromDesktop($event)" hidden="true" accept="image/*" />
+
+      <ion-card *ngIf="photoUrl">
+        <img [src]="photoUrl" />
         <ion-card-content>
-          <ion-button color="danger" expand="block" fill="outline">
+          <ion-button color="danger" expand="block" fill="outline" (click)="onBtnRemoveImageClick()">
             <ion-icon slot="start" name="trash"></ion-icon>
             Remover foto
           </ion-button>
         </ion-card-content>
       </ion-card>
 
-      <div class="ion-text-center">
-        <ion-button color="medium" size="large">
+      <div class="ion-text-center" *ngIf=!photoUrl >
+        <ion-button color="medium" size="large" (click)="onBtnAddImageClick()">
           <ion-icon slot="start" name="image-outline"></ion-icon>
           Adicionar uma foto
         </ion-button>

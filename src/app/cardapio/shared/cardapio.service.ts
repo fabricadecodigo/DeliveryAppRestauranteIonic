@@ -17,12 +17,29 @@ export class CardapioService {
     return this.httpClient.get<ICardapioResponse>(`${environment.api}/cardapio/${id}`).toPromise();
   }
 
-  insert(cardapio: ICardapioModel) {
-    return this.httpClient.post<ICardapioResponse>(`${environment.api}/cardapio/`, cardapio).toPromise();
+  private getFormData(cardapio: ICardapioModel, photo: Blob) {
+    const formData = new FormData();
+    formData.append('category', cardapio.category);
+    formData.append('name', cardapio.name);
+    formData.append('price', cardapio.price.toString());
+    formData.append('description', cardapio.description);
+    if (photo) {
+      formData.append('file', photo);
+    }
+
+    return formData;
   }
 
-  update(id: string, cardapio: ICardapioModel) {
-    return this.httpClient.put<ICardapioResponse>(`${environment.api}/cardapio/${id}`, cardapio).toPromise();
+  insert(cardapio: ICardapioModel, photo: Blob) {
+    const formData = this.getFormData(cardapio, photo);
+
+    return this.httpClient.post<ICardapioResponse>(`${environment.api}/cardapio/`, formData).toPromise();
+  }
+
+  update(id: string, cardapio: ICardapioModel, photo: Blob) {
+    const formData = this.getFormData(cardapio, photo);
+
+    return this.httpClient.put<ICardapioResponse>(`${environment.api}/cardapio/${id}`, formData).toPromise();
   }
 
   delete(id: string) {
