@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Entrar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+
+    <ion-item>
+      <ion-label position="stacked">E-mail</ion-label>
+      <ion-input type="email" [(ngModel)]="user.email" name="email" #email="ngModel" required email></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="email.invalid && (email.dirty || email.touched)">
+      <ion-label color="danger" *ngIf="email.errors.required">{{validationText.required}}</ion-label>
+      <ion-label color="danger" *ngIf="email.errors.email">{{validationText.email}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Senha</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password" name="password" #password="ngModel" required></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="password.invalid && (password.dirty || password.touched)">
+      <ion-label color="danger" *ngIf="password.errors.required">{{validationText.required}}</ion-label>
+    </ion-item>
+
+    <div class="ion-margin-vertical">
+      <ion-button color="primary" expand="block" type="submit" [disabled]="loginForm.invalid">Entrar</ion-button>
+    </div>
+
+  </form>
+</ion-content>
