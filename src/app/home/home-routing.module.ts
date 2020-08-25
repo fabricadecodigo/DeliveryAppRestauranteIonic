@@ -83,6 +83,10 @@ const routes: Routes = [
               .then(m => m.BusinessHoursEditPageModule)
           }
         ]
+      },
+      {
+        path: 'info',
+        loadChildren: () => import('../restaurant/restaurant-info/restaurant-info.module').then( m => m.RestaurantInfoPageModule)
       }
     ]
   }

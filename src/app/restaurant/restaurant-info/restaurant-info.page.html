@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Informações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>Aberto?</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="restaurant.open" name="open"></ion-checkbox>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Nome</ion-label>
+        <ion-input type="text" [(ngModel)]="restaurant.name" name="name" #name="ngModel" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="name.invalid && (name.dirty || name.touched)">
+        <ion-label color="danger">
+          <p *ngIf="name.errors.required">{{validationText.required}}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Telefone</ion-label>
+        <ion-input type="tel" [(ngModel)]="restaurant.phone" name="phone" #phone="ngModel" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+        <ion-label color="danger">
+          <p *ngIf="phone.errors.required">{{validationText.required}}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-divider>
+        <ion-label>Endereço</ion-label>
+      </ion-item-divider>
+
+      <div class="cep-container">
+        <div class="cep-input ion-margin-end">
+          <ion-item>
+            <ion-label position="stacked">Cep</ion-label>
+            <ion-input type="text" [(ngModel)]="restaurant.cep" name="cep" #cep="ngModel" required maxlength="8">
+            </ion-input>
+          </ion-item>
+          <ion-item lines="none" *ngIf="cep.invalid && (cep.dirty || cep.touched)">
+            <ion-label color="danger">
+              <p *ngIf="cep.errors.required">{{validationText.required}}</p>
+            </ion-label>
+          </ion-item>
+        </div>
+        <div class="cep-button ion-margin-top">
+          <ion-button type="button" expand="block" color="secondary" fill="outline" (click)="getAddressByCep()">
+            <ion-icon name="search-outline" slot="start"></ion-icon> Buscar
+          </ion-button>
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Logradouro</ion-label>
+        <ion-input type="text" [(ngModel)]="restaurant.stret" name="stret" #stret="ngModel" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="stret.invalid && (stret.dirty || stret.touched)">
+        <ion-label color="danger">
+          <p *ngIf="stret.errors.required">{{validationText.required}}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Número</ion-label>
+        <ion-input type="text" [(ngModel)]="restaurant.number" name="number" #number="ngModel" #inputNumber required>
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="number.invalid && (number.dirty || number.touched)">
+        <ion-label color="danger">
+          <p *ngIf="number.errors.required">{{validationText.required}}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Complemento</ion-label>
+        <ion-input type="text" [(ngModel)]="restaurant.complement" name="complement" #complement="ngModel">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Bairro</ion-label>
+        <ion-input type="text" [(ngModel)]="restaurant.neighborhood" name="neighborhood" #neighborhood="ngModel"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="neighborhood.invalid && (neighborhood.dirty || neighborhood.touched)">
+        <ion-label color="danger">
+          <p *ngIf="neighborhood.errors.required">{{validationText.required}}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Cidade</ion-label>
+        <ion-input type="text" [(ngModel)]="restaurant.city" name="city" #city="ngModel" required></ion-input>
+      </ion-item>
+      <ion-item lines="none" *ngIf="city.invalid && (city.dirty || city.touched)">
+        <ion-label color="danger">
+          <p *ngIf="city.errors.required">{{validationText.required}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-margin-vertical">
+      <ion-button type="submit" expand="block" color="primary" [disabled]="form.form.invalid">
+        Salvar
+      </ion-button>
+    </div>
+  </form>
+
+</ion-content>

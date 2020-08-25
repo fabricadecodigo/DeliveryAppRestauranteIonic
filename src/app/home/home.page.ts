@@ -9,6 +9,11 @@ export class HomePage implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
+      title: 'Informações',
+      url: '/info',
+      icon: 'information-circle-outline'
+    },
+    {
       title: 'Cardápio',
       url: '/cardapio',
       icon: 'fast-food-outline'
