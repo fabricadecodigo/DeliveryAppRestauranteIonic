@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <h1>Pedidos</h1>
+
+  <ion-card color="danger">
+    <ion-card-header>      
+      <ion-card-title>Pendentes</ion-card-title>
+    </ion-card-header>  
+    <ion-card-content>{{ordersByStatus.amountCreated}}</ion-card-content>
+  </ion-card>
+
+  <ion-card color="warning">
+    <ion-card-header>      
+      <ion-card-title>Confirmados</ion-card-title>
+    </ion-card-header>  
+    <ion-card-content>{{ordersByStatus.amountConfirmed}}</ion-card-content>
+  </ion-card>
+
+  <ion-card color="success">
+    <ion-card-header>      
+      <ion-card-title>Disponíveis para entrega</ion-card-title>
+    </ion-card-header>  
+    <ion-card-content>{{ordersByStatus.amountAvailableToDelivery}}</ion-card-content>
+  </ion-card>
+
+  <ion-card color="primary">
+    <ion-card-header>      
+      <ion-card-title>Finalizados (do dia)</ion-card-title>
+    </ion-card-header>  
+    <ion-card-content>{{ordersByStatus.amountFinished}}</ion-card-content>
+  </ion-card>
+  
+</ion-content>

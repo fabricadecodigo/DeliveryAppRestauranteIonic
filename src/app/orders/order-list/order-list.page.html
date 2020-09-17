@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-select 
+        okText="Selecionar" 
+        cancelText="Cancelar"
+        [(ngModel)]="selectedStatus" name="selectedStatus">
+        <ion-select-option [value]="-1">Nenhum</ion-select-option>
+        <ion-select-option *ngFor="let status of ordersStatus" [value]="status.value">{{status.text}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngFor="let order of getOrders(selectedStatus)" >
+      <div class="container">
+        <div class="item-container">
+          <div class="item-number">{{order.number}}</div>
+          <div class="item-value ion-padding-horizontal">{{order.total | currency:'BRL'}}</div>
+          <div class="item-date">{{order.date | date:'dd/MM/yyyy'}}</div>
+        </div>
+        <div class="item-container">
+          <strong>{{order.statusName}}</strong>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <p *ngIf="getOrders(selectedStatus).length == 0" class="ion-padding ion-text-center">
+    Nenhum pedido encontrado
+  </p>
+
+</ion-content>
