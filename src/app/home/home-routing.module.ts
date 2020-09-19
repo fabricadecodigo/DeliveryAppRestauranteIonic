@@ -98,6 +98,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../orders/order-list/order-list.module').then( m => m.OrderListPageModule)
+          },
+          {
+            path: ':status',
+            loadChildren: () => import('../orders/order-list/order-list.module').then( m => m.OrderListPageModule)
           }
         ]
       }

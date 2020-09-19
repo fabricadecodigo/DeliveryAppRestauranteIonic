@@ -63,4 +63,14 @@ export class OrdersService {
       { value: OrderStatusEnum.finished, text: 'Pedido entregue' }
     ];
   }
+
+  updateStatus(orderId: string, newStatus: OrderStatusEnum) {
+    return this.http.put<IOrderResponse>(`${environment.api}/orders/${orderId}`, { newStatus })
+      .pipe(
+        map(response => {
+          response.statusName = this.getStatusName(response.status, response.deliveryPlaceType);
+          return response;
+        })
+      ).toPromise();
+  }
 }

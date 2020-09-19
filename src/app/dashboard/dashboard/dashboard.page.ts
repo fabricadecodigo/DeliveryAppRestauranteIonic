@@ -1,13 +1,14 @@
-import { OrdersService } from './../../orders/shared/orders.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IOrderAmountByStatusResponse } from './../../orders/shared/iorder-amount-by-status.response';
+import { OrderStatusEnum } from './../../orders/shared/order-status.enum';
+import { OrdersService } from './../../orders/shared/orders.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage {
   ordersByStatus: IOrderAmountByStatusResponse = {
     amountCreated: 0,
     amountConfirmed: 0,
@@ -15,11 +16,13 @@ export class DashboardPage implements OnInit {
     amountFinished: 0
   };
 
+  orderStatusEnum = OrderStatusEnum;
+
   constructor(
     private ordersService: OrdersService
   ) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.loadOrdersByStatus();
   }
 
