@@ -1,3 +1,4 @@
+import { IOrderDetailResponse } from './iorder-detail.response';
 import { IOrderStatus } from './iorders-status';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -51,6 +52,16 @@ export class OrdersService {
               statusName: this.getStatusName(item.status, item.deliveryPlaceType)
             }
           ));
+        })
+      ).toPromise();
+  }
+
+  getById(id: string) {
+    return this.http.get<IOrderDetailResponse>(`${environment.api}/orders/${id}`)
+      .pipe(
+        map(response => {
+          response.statusName = this.getStatusName(response.status, response.deliveryPlaceType);
+          return response;
         })
       ).toPromise();
   }

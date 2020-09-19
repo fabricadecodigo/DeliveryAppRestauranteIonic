@@ -1,3 +1,4 @@
+import { ToastService } from './../../core/services/toast.service';
 import { Component } from '@angular/core';
 import { IOrderAmountByStatusResponse } from './../../orders/shared/iorder-amount-by-status.response';
 import { OrderStatusEnum } from './../../orders/shared/order-status.enum';
@@ -17,17 +18,32 @@ export class DashboardPage {
   };
 
   orderStatusEnum = OrderStatusEnum;
+  interval: any;
 
   constructor(
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private toast: ToastService
   ) { }
 
   ionViewWillEnter() {
     this.loadOrdersByStatus();
+    this.startGettingOrdersByMinute();
+  }
+
+  ionViewWillLeave() {
+    clearInterval(this.interval);
   }
 
   async loadOrdersByStatus() {
     this.ordersByStatus = await this.ordersService.getOrdersAmountByStatus();
   }
 
+  startGettingOrdersByMinute() {
+    this.interval = setInterval(async () => {
+      await this.loadOrdersByStatus();
+      if (this.ordersByStatus.amountCreated > 0) {
+        this.toast.showWarning('Existem pedidos pendentes aguardando confirmação');
+      }
+    }, 10000);
+  }
 }

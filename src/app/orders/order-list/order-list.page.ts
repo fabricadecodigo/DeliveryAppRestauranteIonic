@@ -1,7 +1,7 @@
 import { ToastService } from './../../core/services/toast.service';
 import { OrderStatusEnum } from './../shared/order-status.enum';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
 import { IOrderResponse } from './../shared/iorder.response';
 import { IOrderStatus } from './../shared/iorders-status';
@@ -21,7 +21,8 @@ export class OrderListPage implements OnInit {
     private ordersService: OrdersService,
     private activatedRoute: ActivatedRoute,
     private actionSheetController: ActionSheetController,
-    private toast: ToastService
+    private toast: ToastService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -55,24 +56,35 @@ export class OrderListPage implements OnInit {
       buttons: [
         {
           text: 'Detalhes do pedido',
+          icon: 'eye-outline',
           handler: () => {
-            console.log('Confirmar pedido');
+            this.router.navigate(['orders', 'detail', order._id]);
+          }
+        },
+        {
+          text: 'Pedido pendente',
+          icon: 'checkmark-outline',
+          handler: async () => {
+            await this.changeOrderStatus(order, OrderStatusEnum.created);
           }
         },
         {
           text: 'Confirmar pedido',
+          icon: 'checkmark-done-outline',
           handler: async () => {
             await this.changeOrderStatus(order, OrderStatusEnum.confirmed);
           }
         },
         {
           text: 'Disponível para entrega',
+          icon: 'bicycle-outline',
           handler: async () => {
             await this.changeOrderStatus(order, OrderStatusEnum.availableToDelivery);
           }
         },
         {
           text: 'Finalizado',
+          icon: 'checkmark-done-circle',
           handler: async () => {
             await this.changeOrderStatus(order, OrderStatusEnum.finished);
           }
