@@ -1,11 +1,12 @@
-import { IOrderStatus } from './iorders-status';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from './../../../environments/environment';
 import { DeliveryPlaceType } from './delivery-place-type.enum';
 import { IOrderAmountByStatusResponse } from './iorder-amount-by-status.response';
+import { IOrderDetailResponse } from './iorder-detail.response';
 import { IOrderResponse } from './iorder.response';
+import { IOrderStatus } from './iorders-status';
 import { OrderStatusEnum } from './order-status.enum';
 
 @Injectable({
@@ -55,6 +56,16 @@ export class OrdersService {
       ).toPromise();
   }
 
+  getById(id: string) {
+    return this.http.get<IOrderDetailResponse>(`${environment.api}/orders/${id}`)
+      .pipe(
+        map(response => {
+          response.statusName = this.getStatusName(response.status, response.deliveryPlaceType);
+          return response;
+        })
+      ).toPromise();
+  }
+
   getOrderStatus(): IOrderStatus[] {
     return [
       { value: OrderStatusEnum.created, text: 'Aguardando confirmação' },
@@ -62,5 +73,15 @@ export class OrdersService {
       { value: OrderStatusEnum.availableToDelivery, text: 'Disponível para entrega' },
       { value: OrderStatusEnum.finished, text: 'Pedido entregue' }
     ];
+  }
+
+  updateStatus(orderId: string, newStatus: OrderStatusEnum) {
+    return this.http.put<IOrderResponse>(`${environment.api}/orders/${orderId}`, { newStatus })
+      .pipe(
+        map(response => {
+          response.statusName = this.getStatusName(response.status, response.deliveryPlaceType);
+          return response;
+        })
+      ).toPromise();
   }
 }

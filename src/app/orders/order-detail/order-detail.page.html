@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pedido</ion-title>
+    <ion-title size="small">{{ order.number }}</ion-title>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+
+  <ion-list>
+    <ion-item>
+      <ion-label><strong>{{ order.statusName }}</strong></ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>{{order.date | date:'dd/MM/yyyy'}}</ion-label>
+    </ion-item>
+
+    <!-- Cliente -->
+    <ion-item-divider color="light">
+      <ion-label>Cliente</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>{{ order.customer?.name }}</ion-label>
+    </ion-item>
+    <ion-item href="tel:{{ order.customer?.phone }}" lines="none">
+      <ion-label>{{order.customer?.phone}}</ion-label>
+    </ion-item>
+    
+    <!-- Entrega -->
+    <ion-item-divider color="light">
+      <ion-label>Entrega</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label *ngIf="order.deliveryPlaceType === deliveryPlaceType.restaurant">
+        Retirar no local
+      </ion-label>
+      <ion-label *ngIf="order.deliveryPlaceType === deliveryPlaceType.delivery" class="ion-text-wrap">
+        {{getAddressText(order.address)}}
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label *ngIf="order.delivery?.free" >Entrega grátis</ion-label>
+      <ion-label *ngIf="!order.delivery?.free">Valor: {{ order.delivery?.tax | currency:'BRL' }}</ion-label>
+    </ion-item>
+
+    <!-- Pagamento -->
+    <ion-item-divider color="light">
+      <ion-label>Pagamento</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label *ngIf="order.payment?.paymentType == paymentType.money">Dinheiro</ion-label>
+      <ion-label *ngIf="order.payment?.paymentType == paymentType.card">Cartão</ion-label>
+    </ion-item>
+    <ion-item *ngIf="order.payment?.paymentType == paymentType.money">
+      <ion-label><strong>Troco para:</strong> {{ order.payment?.changeFor | currency:'BRL' }} </ion-label>
+    </ion-item>
+    <ion-item *ngIf="order.payment?.paymentType == paymentType.card">
+      <ion-label>{{ getCardText(order.payment?.cardType) }} </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>Total: {{ order.total | currency:'BRL' }} </ion-label>
+    </ion-item>
+
+    <!-- Itens do pedido -->
+    <ion-item-divider color="light">
+      <ion-label>Itens</ion-label>
+    </ion-item-divider>
+    <ion-item lines="full" *ngFor="let item of order.items">
+      <div class="item-container">
+        <div class="item-detail">
+          <div class="item-quantity">{{item?.quantity}}x</div>
+          <div class="item-name ion-padding-horizontal">{{item?.name}}</div>
+          <div class="item-total">{{ item?.total | currency:'BRL' }} </div>
+        </div>
+        <div class="item-detail" *ngIf="item?.notes" >
+          <div>{{ item?.notes }}</div>
+        </div>
+      </div>      
+    </ion-item>
+    
+  </ion-list>
+
+</ion-content>

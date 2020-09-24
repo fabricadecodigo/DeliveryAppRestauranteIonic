@@ -22,7 +22,7 @@
       </ion-select>
     </ion-item>
 
-    <ion-item *ngFor="let order of getOrders(selectedStatus)" >
+    <ion-item *ngFor="let order of getOrders(selectedStatus)" (click)="showOrderOptions(order)">
       <div class="container">
         <div class="item-container">
           <div class="item-number">{{order.number}}</div>

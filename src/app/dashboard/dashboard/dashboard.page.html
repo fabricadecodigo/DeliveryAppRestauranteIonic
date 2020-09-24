@@ -11,28 +11,28 @@
 
   <h1>Pedidos</h1>
 
-  <ion-card color="danger">
+  <ion-card color="danger" [routerLink]="['/orders', orderStatusEnum.created]">
     <ion-card-header>      
       <ion-card-title>Pendentes</ion-card-title>
     </ion-card-header>  
     <ion-card-content>{{ordersByStatus.amountCreated}}</ion-card-content>
   </ion-card>
 
-  <ion-card color="warning">
+  <ion-card color="warning" [routerLink]="['/orders', orderStatusEnum.confirmed]">
     <ion-card-header>      
       <ion-card-title>Confirmados</ion-card-title>
     </ion-card-header>  
     <ion-card-content>{{ordersByStatus.amountConfirmed}}</ion-card-content>
   </ion-card>
 
-  <ion-card color="success">
+  <ion-card color="success" [routerLink]="['/orders', orderStatusEnum.availableToDelivery]">
     <ion-card-header>      
       <ion-card-title>Disponíveis para entrega</ion-card-title>
     </ion-card-header>  
     <ion-card-content>{{ordersByStatus.amountAvailableToDelivery}}</ion-card-content>
   </ion-card>
 
-  <ion-card color="primary">
+  <ion-card color="primary" [routerLink]="['/orders', orderStatusEnum.finished]">
     <ion-card-header>      
       <ion-card-title>Finalizados (do dia)</ion-card-title>
     </ion-card-header>  

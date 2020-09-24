@@ -1,0 +1,21 @@
+.item-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.item-detail {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.item-name {
+  flex-grow: 1;
+}
+
+.item-total {
+  text-align: right;
+}
