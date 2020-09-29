@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'http://api-meuappdelivery-com.umbler.net'
+  api: 'https://api-meuappdelivery-com.umbler.net'
 };
